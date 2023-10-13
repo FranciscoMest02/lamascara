@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cookie": "^0.5.0",
+    "dotenv": "^16.3.1",
+    "js-cookie": "^3.0.5",
+    "mongoose": "^7.5.3",
+    "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "autoprefixer": "latest",
