@@ -15,7 +15,7 @@ export async function updateUser(data){
     };
 
     try {
-        const host = process.env.NODE_ENV == 'prod' ? 'https://linkdeploy.com/' : 'http://localhost:3000/'
+        const host = process.env.NODE_ENV == 'prod' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
         const response = await fetch(host + 'api/participantes/' + id, {
             method: 'PUT', // Specify the PUT method
             headers: {
@@ -53,7 +53,7 @@ export async function createUser(data) {
     };
 
     try {
-        const host = process.env.NODE_ENV == 'prod' ? 'https://linkdeploy.com/' : 'http://localhost:3000/'
+        const host = process.env.NODE_ENV == 'prod' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
         const response = await fetch(host + 'api/participantes', {
             method: 'POST', // Specify the PUT method
             headers: {
@@ -80,7 +80,7 @@ export async function createUser(data) {
 
 export async function deleteUser(id) {
     try {
-        const host = process.env.NODE_ENV == 'prod' ? 'https://linkdeploy.com/' : 'http://localhost:3000/'
+        const host = process.env.NODE_ENV == 'prod' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
         const response = await fetch(host + 'api/participantes/' + id, {
             method: 'DELETE',
             headers: {
@@ -101,7 +101,8 @@ export async function deleteUser(id) {
 }
 
 export async function updateMasks(status) {
-    const response = await fetch('http://localhost:3000/api/mascaras', {
+    const host = process.env.NODE_ENV == 'prod' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
+    const response = await fetch(host + 'api/mascaras', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json', // Set the content type to JSON
