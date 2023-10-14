@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar"
 import TablaMascara from "../components/TablaMascaras";
 import Image from 'next/image';
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return (
     <>

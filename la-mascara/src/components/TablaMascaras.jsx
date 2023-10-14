@@ -2,8 +2,6 @@ import TarjetaMascara from './TarjetaMascaras';
 import { connectDB } from '@/utils/db';
 import Mascara from '@/models/Mascara';
 
-export const dynamic = 'force-dynamic'
-
 async function loadMascaras() {
   connectDB()
   const mascaras = await Mascara.find()
