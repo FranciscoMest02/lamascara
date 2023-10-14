@@ -22,7 +22,6 @@ export async function updateUser(data){
             'Content-Type': 'application/json', // Set the content type to JSON
             },
             body: JSON.stringify(dataToUpdate), // Convert the data to JSON and send it in the body
-            next: { revalidate: 10 }
         });
     
         if (!response.ok) {
@@ -61,7 +60,6 @@ export async function createUser(data) {
             'Content-Type': 'application/json', // Set the content type to JSON
             },
             body: JSON.stringify(dataCreation), // Convert the data to JSON and send it in the body
-            next: { revalidate: 10 }
         });
     
         if (!response.ok) {
@@ -89,7 +87,6 @@ export async function deleteUser(id) {
             'Content-Type': 'application/json', // Set the content type to JSON
             },
             body: JSON.stringify({}), // Convert the data to JSON and send it in the body
-            next: { revalidate: 10 }
         });
     
         if (!response.ok) {
@@ -111,7 +108,6 @@ export async function updateMasks(status) {
         'Content-Type': 'application/json', // Set the content type to JSON
         },
         body: JSON.stringify(status), // Convert the data to JSON and send it in the body7
-        next: { revalidate: 10 }
     });
     console.log(response.ok)
     if (!response.ok) {

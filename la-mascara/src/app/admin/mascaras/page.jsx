@@ -6,6 +6,8 @@ import GestorMascaras from '@/components/GestorMascaras';
 import Mascara from '@/models/Mascara';
 import { connectDB } from '@/utils/db';
 
+export const dynamic = 'force-dynamic'
+
 async function loadMascaras() {
   connectDB()
   const mascaras = await Mascara.find()

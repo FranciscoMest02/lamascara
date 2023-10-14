@@ -2,6 +2,8 @@ import NavbarAdmin from '@/components/NavbarAdmin';
 import GestorParticipantes from '@/components/GestorParticipantes';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminMascaras() {
 
   return (
