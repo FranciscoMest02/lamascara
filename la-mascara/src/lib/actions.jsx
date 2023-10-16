@@ -103,7 +103,10 @@ export async function deleteUser(id) {
 export async function updateMasks(status) {
     try {
         const host = process.env.NODE_ENV == 'production' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
-        const response = await fetch(host + 'api/mascaras', {
+        //Mandamos un url con la fecha (cambiante) para que nunca nos haga un cache de la llamada a la api
+        const uniqueQueryParam = Date.now();
+        const apiUrl = `/api/mascaras/` + uniqueQueryParam;
+        const response = await fetch(host + apiUrl, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json', // Set the content type to JSON

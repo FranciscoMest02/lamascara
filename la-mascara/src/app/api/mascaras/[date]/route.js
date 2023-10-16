@@ -2,18 +2,11 @@ import {NextResponse} from 'next/server'
 import { connectDB } from '@/utils/db';
 import Mascara from '@/models/Mascara';
 
-export async function  GET() {
-    await connectDB()
-    const mascaras = await Mascara.find()
-    return NextResponse.json(mascaras);
-}
-
-//No se usa esta ruta, se usa la dinamica
-/*
-export async function POST(req, res) {
+export async function POST(req, { params }) {
     try {
-        console.log('api')
-        await connectDB()
+        //tenemos un parametro variable para que next no haga cache
+        const test = params.date
+        connectDB()
         
         const data = await req.json()
         
@@ -25,11 +18,10 @@ export async function POST(req, res) {
             
         })
         
-        res.setHeader('Cache-Control', 'no-cache');
+        //res.setHeader('Cache-Control', 'no-cache');
         return NextResponse.json(resp);
     } catch (e) {
         console.log(e)
         return NextResponse.json(e)
     }
 }
-*/

@@ -22,15 +22,13 @@ function GestorMascaras(props) {
                 const state = inputElement.checked !== inputElement.defaultChecked ? inputElement.checked : inputElement.defaultChecked;
                 const changed = inputElement.checked !== inputElement.defaultChecked
                 if (changed){
-                    console.log(item.name)
-                    console.log(changed)
+                    const values = {
+                        '_id': item._id,
+                        'alive': state,
+                        'changed': changed
+                    }
+                    checkboxValues.push(values);
                 }
-                const values = {
-                    '_id': item._id,
-                    'alive': state,
-                    'changed': changed
-                }
-                checkboxValues.push(values);
             }
         });
     
