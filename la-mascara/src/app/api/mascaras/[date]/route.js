@@ -11,7 +11,7 @@ export async function POST(req, { params }) {
         const data = await req.json()
         
         const resp = await data.map(async (mask) => {
-            console.log(mask._id)
+            //console.log(mask._id)
             const mascara = await Mascara.findById(mask._id.toString())
             mascara.alive = mask.alive
             await mascara.save()

@@ -113,7 +113,7 @@ export async function updateMasks(status) {
             },
             body: JSON.stringify(status), // Convert the data to JSON and send it in the body7
         });
-        console.log(response.ok)
+        //console.log(response.ok)
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
