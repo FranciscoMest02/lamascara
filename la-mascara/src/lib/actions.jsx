@@ -105,7 +105,7 @@ export async function updateMasks(status) {
         const host = process.env.NODE_ENV == 'production' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
         //Mandamos un url con la fecha (cambiante) para que nunca nos haga un cache de la llamada a la api
         const uniqueQueryParam = Date.now();
-        const apiUrl = `/api/mascaras/` + uniqueQueryParam;
+        const apiUrl = `api/mascaras/` + uniqueQueryParam;
         const response = await fetch(host + apiUrl, {
             method: 'POST',
             headers: {
