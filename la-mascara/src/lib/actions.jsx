@@ -101,21 +101,21 @@ export async function deleteUser(id) {
 }
 
 export async function updateMasks(status) {
-    const host = process.env.NODE_ENV == 'production' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
-    const response = await fetch(host + 'api/mascaras', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json', // Set the content type to JSON
-        },
-        body: JSON.stringify(status), // Convert the data to JSON and send it in the body7
-    });
-    console.log(response.ok)
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-
-    return {status: 200}
     try {
+        const host = process.env.NODE_ENV == 'production' ? 'https://lamascara.vercel.app/' : 'http://localhost:3000/'
+        const response = await fetch(host + 'api/mascaras', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+            },
+            body: JSON.stringify(status), // Convert the data to JSON and send it in the body7
+        });
+        console.log(response.ok)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    
+        return {status: 200}
     } catch (error) {
         // Handle any errors that occurred during the fetch
         console.error('Fetch error:', error);
