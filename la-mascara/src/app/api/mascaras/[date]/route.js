@@ -9,17 +9,27 @@ export async function POST(req, { params }) {
         connectDB()
         
         const data = await req.json()
-        
+
+        const maskIds = data.map(mask => mask._id.toString());
+        const updateData = data.map(mask => ({ _id: mask._id, alive: mask.alive }));
+
+        const result = await Mascara.updateMany(
+            { _id: { $in: maskIds } },
+            { $set: { alive: updateData } }
+        );
+        /*
         const resp = await data.map(async (mask) => {
             //console.log(mask._id)
             const mascara = await Mascara.findById(mask._id.toString())
             mascara.alive = mask.alive
             await mascara.save()
             
-        })
+        })*/
+
+        console.log(result)
         
         //res.setHeader('Cache-Control', 'no-cache');
-        return NextResponse.json(resp);
+        return NextResponse.json(result);
     } catch (e) {
         console.log(e)
         return NextResponse.json(e)
