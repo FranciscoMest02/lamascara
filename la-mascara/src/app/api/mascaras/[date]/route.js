@@ -11,7 +11,7 @@ export async function POST(req, { params }) {
         const data = await req.json()
 
         const maskIds = data.map(mask => mask._id.toString());
-        const updateData = data.map(mask => ({ _id: mask._id, alive: mask.alive }));
+        const updateData = data.map(mask => mask.alive);
 
         const result = await Mascara.updateMany(
             { _id: { $in: maskIds } },
