@@ -25,7 +25,6 @@ function GestorMascaras(props) {
                     const values = {
                         '_id': item._id,
                         'alive': state,
-                        'changed': changed
                     }
                     checkboxValues.push(values);
                 }

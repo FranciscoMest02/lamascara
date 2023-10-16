@@ -10,13 +10,19 @@ export async function POST(req, { params }) {
         
         const data = await req.json()
 
-        const maskIds = data.map(mask => mask._id.toString());
-        const updateData = data.map(mask => mask.alive);
-
-        const result = await Mascara.updateMany(
-            { _id: { $in: maskIds } },
-            { $set: { alive: updateData } }
-        );
+        try {
+            const bulkUpdates = data.map(({ _id, alive }) => ({
+              updateOne: {
+                filter: { _id },
+                update: { $set: { alive } },
+              },
+            }));
+        
+            const result = await Mascara.bulkWrite(bulkUpdates);
+            console.log(`Updated ${result.modifiedCount} documents.`);
+          } catch (error) {
+            console.error('Error updating documents:', error);
+          }
         /*
         const resp = await data.map(async (mask) => {
             //console.log(mask._id)
