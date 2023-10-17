@@ -1,15 +1,17 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { createUser } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
 function UserCreation( props ) {
     const router = useRouter()
     const mascaras = props.mascaras
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setIsLoading(true)
         const formData = new FormData(e.currentTarget);
         const name = formData.get('name')
         const mask1 = formData.get('mask1')
@@ -23,6 +25,7 @@ function UserCreation( props ) {
         const res =  await createUser(dataCreation)
         
         if(res.status == 200){
+            router.refresh()
             router.push('/admin/participantes')
         }
 
@@ -41,7 +44,7 @@ function UserCreation( props ) {
 
                 <div className="grid grid-cols-2 mt-16 w-full justify-items-center">
                     
-                    <div className='grid m-8 border'>
+                    <div className='grid m-8'>
                         <label htmlFor="mask1" className='text-xl text-tekhelet mb-6'>Escoge una mascara:</label>
                         <select name="mask1" id="mask1">
                             {mascaras.map((item) => (
@@ -50,7 +53,7 @@ function UserCreation( props ) {
                         </select>
                     </div>
                     
-                    <div className='grid  m-8 border'>
+                    <div className='grid  m-8'>
                         <label htmlFor="mask2" className='text-xl text-tekhelet mb-6'>Escoge una mascara:</label>
                         <select name="mask2" id="mask2">
                             {mascaras.map((item) => (
@@ -61,7 +64,10 @@ function UserCreation( props ) {
                 </div>
                 
                 <div className='flex justify-around mt-16 '>
-                    <button type="submit"  className='text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'>Crear</button>
+                    <button type="submit" disabled={isLoading} className='text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'>
+                        {isLoading && <>Creando...</>}
+                        {!isLoading && <>Crear</>}
+                    </button>
                 </div>
             </form>
         </>    

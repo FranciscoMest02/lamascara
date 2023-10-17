@@ -1,15 +1,17 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { updateMasks } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
 function GestorMascaras(props) {
     const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        setIsLoading(true)
     
         const checkboxValues = [];
     
@@ -34,8 +36,8 @@ function GestorMascaras(props) {
         const res =  await updateMasks(checkboxValues)
         
         if(res.status == 200){
-            router.push('/admin/mascaras')
             router.refresh()
+            router.push('/admin/mascaras')
         }
     }
     
@@ -69,7 +71,10 @@ function GestorMascaras(props) {
             </div>
 
             <div className='flex justify-around mt-16 mb-8'>
-                <button type='submit' className={'text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'}>Guardar</button>
+                <button type='submit' disabled={isLoading} className={'text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'}>
+                    {isLoading && <>Guardando...</>}
+                    {!isLoading && <>Guardar</>}
+                </button>
             </div>
             </form>
             )

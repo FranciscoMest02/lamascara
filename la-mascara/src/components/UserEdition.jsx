@@ -12,9 +12,11 @@ function UserEdition( props ) {
     const router = useRouter()
 
     const [action, setAction] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         const formData = new FormData(e.currentTarget);
         if(action === 'update'){
             await handleUpdated(formData)
@@ -39,6 +41,7 @@ function UserEdition( props ) {
         const res =  await updateUser(dataToUpdate)
         
         if(res.status == 200){
+            router.refresh()
             router.push('/admin/participantes')
         }
     }
@@ -49,6 +52,7 @@ function UserEdition( props ) {
         const res =  await deleteUser(id)
         
         if(res.status == 200){
+            router.refresh()
             router.push('/admin/participantes')
         }
     }
@@ -89,8 +93,9 @@ function UserEdition( props ) {
                 <input type="hidden" name="id" value={parti.id} />
                 
                 <div className='flex justify-around mt-16 '>
-                    <button type="submit" onClick={() => {setAction('delete')}} className='px-16 py-2 rounded-xl bg-red-700 hover:bg-red-500 text-white'>Borrar</button>
-                    <button type="submit" onClick={() => {setAction('update')}} className='text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'>Actualizar</button>
+                    <button type="submit" disabled={isLoading} onClick={() => {setAction('delete')}} className='px-16 py-2 rounded-xl bg-red-700 hover:bg-red-500 text-white'>Borrar</button>
+                    {isLoading && <p>Actualizando...</p>}
+                    <button type="submit" disabled={isLoading} onClick={() => {setAction('update')}} className='text-white px-16 py-2 bg-darkpurple mr-8 rounded-xl hover:bg-tropicalindigo'>Actualizar</button>
                 </div>
             </form>
         </>    
