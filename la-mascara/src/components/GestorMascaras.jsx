@@ -38,6 +38,7 @@ function GestorMascaras(props) {
         if(res.status == 200){
             router.refresh()
             router.push('/admin/mascaras')
+            setIsLoading(false)
         }
     }
     
